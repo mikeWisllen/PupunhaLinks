@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+ * PupunhaLinks — tokens globais (tema inspirado em Evangelion)
+ * Interface: painéis escuros angulares, laranja de alerta e serifa pesada.
+ * Os fundos e as cores de destaque vêm de src/data/backgrounds.ts.
+ * ------------------------------------------------------------------------- */
+@theme {
+  --font-sans: 'Chakra Petch', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Noto Serif', ui-serif, Georgia, serif;
+  --color-alert: #ff8a1f;
+  --color-panel: #0b0b11;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-alert);
+    outline-offset: 2px;
+  }
+}
+
+/* Título em serifa pesada e comprimida, como cartões de título. */
+.title-display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  transform: scaleX(0.86);
+  transform-origin: left center;
+  width: 116%;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 0.55);
+}
+
+/* Faixa de alerta listrada; a cor vem de --stripe. */
+.hazard-stripe {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--stripe, var(--color-alert)) 0 6px,
+    #0a0a0a 6px 12px
+  );
+}
+
+/* Canto inferior direito cortado, no estilo de painel técnico. */
+.panel-cut {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+
+@keyframes sheet-enter {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+.sheet-enter {
+  animation: sheet-enter 220ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet-enter {
+    animation: none;
+  }
+}
